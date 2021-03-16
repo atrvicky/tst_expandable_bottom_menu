@@ -3,7 +3,7 @@
 Current situation:
 
 <div align="center">
-	<img src="tree/master/images/Start.png" height="200">
+	<img src="images/Start.png" height="200">
 	<p>
 		<b>Test</b>
 	</p>
