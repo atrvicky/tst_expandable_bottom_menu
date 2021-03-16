@@ -2,7 +2,9 @@
 
 Current situation:
 
-![alt text](https://github.com/UnravelSports/[reponame]/blob/[branch]/image.jpg?raw=true)
+![alt text](https://github.com/UnravelSports/tst_expandable_bottom_menu/tree/master/images/Start.png?raw=true)
+
+![alt text](https://github.com/UnravelSports/tst_expandable_bottom_menu/tree/master/images/End.png?raw=true)
 
 
 ## Getting Started
