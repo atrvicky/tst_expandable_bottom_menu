@@ -4,7 +4,6 @@ Current situation:
 
 <div class="row">
   <div class="column">
-  <div align="center">
   	<img src="images/Start.png" height="400">
   	<p>
   		<b>Test</b>
@@ -12,16 +11,13 @@ Current situation:
   	<br>
   	<br>
   </div>
-  </div>
   <div class="column">
-  <div align="center">
-  	<img src="images/End.png" height="400">
+  	<img src="images/Result.png" height="400">
   	<p>
   		<b>Test</b>
   	</p>
   	<br>
   	<br>
-  </div>
   </div>
 </div>
 
