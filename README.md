@@ -2,9 +2,15 @@
 
 Current situation:
 
-![alt text](https://github.com/UnravelSports/tst_expandable_bottom_menu/tree/master/images/Start.png?raw=true)
+<div align="center">
+	<img src="tree/master/images/Start.png" height="200">
+	<p>
+		<b>Test</b>
+	</p>
+	<br>
+	<br>
+</div>
 
-![alt text](https://github.com/UnravelSports/tst_expandable_bottom_menu/tree/master/images/End.png?raw=true)
 
 
 ## Getting Started
