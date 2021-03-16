@@ -62,9 +62,10 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+      // FloatingActionButton is a UnicornDialer
       floatingActionButton: UnicornDialer(
         parentButtonBackground: Colors.grey[700],
-        orientation: UnicornOrientation.HORIZONTAL,
+        orientation: UnicornOrientation.VERTICAL,
         parentButton: Icon(Icons.person),
         childButtons: _getProfileMenu(),
       ), // This trailing comma makes auto-formatting nicer for build methods.
@@ -90,7 +91,9 @@ List<UnicornButton> _getProfileMenu() {
         onPressed: () {},
       ),
     ),
-    // TODO
+    // TODO: Make the UnicornButton take a UnicornDailer, so that we can expand the menu twice.
+    // TODO: See images/Start.png and images/Result.png to see what the end result should look like
+    //
     // UnicornButton(
     //   currentButton: UnicornDialer(
     //     parentButtonBackground: Colors.grey[700],
