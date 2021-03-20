@@ -28,7 +28,7 @@
   <div class="imgContainer">
           <img src="images/todo_22.png" height="300">
   </div>
-- [ ] 3. <b>All branches of the menu should collapse when we click on the background</b> (purple, see image)
+- [ ] 3. <b>All branches of the menu should collapse when we click on the background</b> (I made the background purple, just so it is easier to understand what I mean with background)
     <div class="imgContainer">
             <img src="images/todo_3.png" height="300">
     </div>
