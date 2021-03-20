@@ -38,5 +38,5 @@
     </div>
 - [ ] 5. <b>All branches of the menu should collapse when we press the big X</b> (the main floatingactionbutton)
     <div class="imgContainer">
-          <img src="images/todo_4.png" height="300">
+          <img src="images/todo_6.png" height="300">
     </div>
