@@ -80,7 +80,7 @@ List<UnicornDialer> _getProfileMenu() {
     UnicornDialer(
       parentButtonBackground: Colors.grey[700],
       backgroundColor: Colors.transparent,
-      parentButton: Icon(Icons.add),
+      parentButton: Icon(Icons.access_alarm),
       childButtons: [
         FloatingActionButton(
           backgroundColor: Colors.grey[700],
@@ -96,7 +96,7 @@ List<UnicornDialer> _getProfileMenu() {
     UnicornDialer(
       parentButtonBackground: Colors.grey[700],
       backgroundColor: Colors.transparent,
-      parentButton: Icon(Icons.settings),
+      parentButton: Icon(Icons.accessibility_new_sharp),
       childButtons: [
         FloatingActionButton(
           backgroundColor: Colors.grey[700],
