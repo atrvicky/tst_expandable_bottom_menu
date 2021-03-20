@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tst_expandable_bottom_menu/nestedFab.dart';
 import 'package:tst_expandable_bottom_menu/unicorndial_2.dart';
 // import 'package:unicorndial/unicorndial.dart';
 
@@ -62,35 +63,53 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      // FloatingActionButton is a UnicornDialer
-      floatingActionButton: UnicornDialer(
+      // FloatingActionButton is a NestedFab which is a list of UnicornDialers
+      floatingActionButton: NestedFab(
         parentButtonBackground: Colors.grey[700],
-        orientation: UnicornOrientation.VERTICAL,
-        parentButton: Icon(Icons.person),
-        childButtons: _getProfileMenu(),
+        orientation: UnicornOrientation.HORIZONTAL,
+        backgroundColor: Colors.black38,
+        parentButtonIcon: Icon(Icons.person),
+        children: _getProfileMenu(),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
 
-List<UnicornButton> _getProfileMenu() {
-  List<UnicornButton> children = [
-    UnicornButton(
-      currentButton: FloatingActionButton(
-        backgroundColor: Colors.grey[500],
-        mini: true,
-        child: Icon(Icons.account_balance),
-        onPressed: () {},
-      ),
+List<UnicornDialer> _getProfileMenu() {
+  List<UnicornDialer> children = [
+    UnicornDialer(
+      parentButtonBackground: Colors.grey[700],
+      backgroundColor: Colors.transparent,
+      parentButton: Icon(Icons.add),
+      childButtons: [
+        FloatingActionButton(
+          backgroundColor: Colors.grey[700],
+          mini: true,
+          heroTag: "bankTag",
+          child: Icon(Icons.account_balance),
+          onPressed: () {
+            print("bank");
+          },
+        ),
+      ],
     ),
-    UnicornButton(
-      currentButton: FloatingActionButton(
-        backgroundColor: Colors.grey[500],
-        mini: true,
-        child: Icon(Icons.settings),
-        onPressed: () {},
-      ),
-    ),
+    UnicornDialer(
+      parentButtonBackground: Colors.grey[700],
+      backgroundColor: Colors.transparent,
+      parentButton: Icon(Icons.settings),
+      childButtons: [
+        FloatingActionButton(
+          backgroundColor: Colors.grey[700],
+          mini: true,
+          heroTag: "phoneTag",
+          child: Icon(Icons.phone),
+          onPressed: () {
+            print("phone");
+          },
+        ),
+      ],
+    )
+
     // TODO: Make the UnicornButton take a UnicornDailer, so that we can expand the menu twice.
     // TODO: See images/Start.png and images/Result.png to see what the end result should look like
     //
