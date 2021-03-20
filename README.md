@@ -26,11 +26,11 @@
 - [ ] 2. Only one sub-branch can be opened at a time. So, when we click the "clock" and then click the "person". 
          The "clock"-branch should close. 
   <div class="imgContainer">
-          <img src="images/todo_3.png" height="300">
+          <img src="images/todo_22.png" height="300">
   </div>
 - [ ] 3. All branches of the menu should collapse when we click on the background (purple, see image)
     <div class="imgContainer">
-            <img src="images/todo_22.png" height="300">
+            <img src="images/todo_3.png" height="300">
     </div>
 - [ ] 4. All branches of the menu should collapse when we press the bank/phone button (when we press the 2nd branch button)
     <div class="imgContainer">
