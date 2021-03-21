@@ -84,6 +84,7 @@ List<UnicornDialer> _getProfileMenu() {
       parentButtonBackground: Colors.red,
       backgroundColor: Colors.transparent,
       parentButton: Icon(Icons.add),
+      parentHeroTag: "addParentTag",
       childButtons: [
         FloatingActionButton(
           backgroundColor: Colors.grey[700],
@@ -109,6 +110,7 @@ List<UnicornDialer> _getProfileMenu() {
       parentButtonBackground: Colors.grey[700],
       backgroundColor: Colors.transparent,
       parentButton: Icon(Icons.settings),
+      parentHeroTag: "settingParentTag",
       childButtons: [
         FloatingActionButton(
           backgroundColor: Colors.grey[700],

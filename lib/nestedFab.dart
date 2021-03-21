@@ -33,6 +33,14 @@ class NestedFab extends StatefulWidget {
 
   @override
   State<NestedFab> createState() => _NestedFabState();
+
+  void collapseOtherParents(String tag) {
+    for (UnicornDialer dialer in children) {
+      if (dialer.parentHeroTag != tag) {
+        dialer.collapseParent();
+      }
+    }
+  }
 }
 
 class _NestedFabState extends State<NestedFab> with TickerProviderStateMixin {
@@ -41,16 +49,17 @@ class _NestedFabState extends State<NestedFab> with TickerProviderStateMixin {
 
   bool isOpen = false;
 
+
   @override
   void initState() {
-    this._animationController = AnimationController(
+    _animationController = AnimationController(
       vsync: this,
       duration: Duration(
         milliseconds: 180,
       ),
     );
 
-    this._parentController = AnimationController(
+    _parentController = AnimationController(
       vsync: this,
       duration: Duration(
         milliseconds: 200,
@@ -62,22 +71,30 @@ class _NestedFabState extends State<NestedFab> with TickerProviderStateMixin {
 
   @override
   dispose() {
-    this._animationController.dispose();
-    this._parentController.dispose();
+    _animationController.dispose();
+    _parentController.dispose();
     super.dispose();
   }
 
   void mainActionButtonOnPressed() {
-    if (this._animationController.isDismissed) {
-      this._animationController.forward();
+    if (_animationController.isDismissed) {
+      _animationController.forward();
+      collapseAllParents();
     } else {
-      this._animationController.reverse();
+      _animationController.reverse();
+    }
+  }
+
+  void collapseAllParents() {
+    for (UnicornDialer dialer in widget.children) {
+      dialer.collapseParent();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    this._animationController.reverse();
+    if (_animationController != null)
+      _animationController.reverse();
 
     var hasChildButtons = widget.children != null && widget.children.length > 0;
 
@@ -90,80 +107,85 @@ class _NestedFabState extends State<NestedFab> with TickerProviderStateMixin {
       }
     }
 
-    if (!this._parentController.isAnimating) {
-      if (this._parentController.isCompleted) {
-        this._parentController.forward().then((s) {
-          this._parentController.reverse().then((e) {
-            this._parentController.forward();
+    if (_parentController != null &&
+        !_parentController.isAnimating) {
+      if (_parentController.isCompleted) {
+        _parentController.forward().then((s) {
+          _parentController.reverse().then((e) {
+            _parentController.forward();
           });
         });
       }
-      if (this._parentController.isDismissed) {
-        this._parentController.reverse().then((s) {
-          this._parentController.forward();
+      if (_parentController.isDismissed) {
+        _parentController.reverse().then((s) {
+          _parentController.forward();
         });
       }
     }
 
-    var mainFAB = AnimatedBuilder(
-      animation: this._parentController,
-      builder: (
-        BuildContext context,
-        Widget child,
-      ) {
-        return Transform(
-          transform: new Matrix4.diagonal3(
-            vector.Vector3(
-              _parentController.value,
-              _parentController.value,
-              _parentController.value,
-            ),
-          ),
-          alignment: FractionalOffset.center,
-          child: FloatingActionButton(
-            isExtended: false,
-            heroTag: "parent",
-            backgroundColor: widget.parentButtonBackground,
-            onPressed: () {
-              mainActionButtonOnPressed();
-              if (widget.onMainButtonPressed != null) {
-                widget.onMainButtonPressed();
-              }
-            },
-            child: !hasChildButtons
-                ? widget.parentButtonIcon
-                : AnimatedBuilder(
-                    animation: this._animationController,
-                    builder: (BuildContext context, Widget child) {
-                      return Transform(
-                        transform: new Matrix4.rotationZ(
-                            this._animationController.value * 0.8),
-                        alignment: FractionalOffset.center,
-                        child: this._animationController.isDismissed
-                            ? widget.parentButtonIcon
-                            : new Icon(
-                                widget.finalButtonIcon == null
-                                    ? Icons.close
-                                    : widget.finalButtonIcon.icon,
-                              ),
-                      );
-                    },
+    var mainFAB = _parentController != null
+        ? AnimatedBuilder(
+            animation: _parentController,
+            builder: (
+              BuildContext context,
+              Widget child,
+            ) {
+              return Transform(
+                transform: new Matrix4.diagonal3(
+                  vector.Vector3(
+                    _parentController.value,
+                    _parentController.value,
+                    _parentController.value,
                   ),
-          ),
-        );
-      },
-    );
+                ),
+                alignment: FractionalOffset.center,
+                child: FloatingActionButton(
+                  isExtended: false,
+                  heroTag: "parent",
+                  backgroundColor: widget.parentButtonBackground,
+                  onPressed: () {
+                    mainActionButtonOnPressed();
+                    if (widget.onMainButtonPressed != null) {
+                      widget.onMainButtonPressed();
+                    }
+                  },
+                  child: !hasChildButtons
+                      ? widget.parentButtonIcon
+                      : AnimatedBuilder(
+                          animation: _animationController,
+                          builder: (BuildContext context, Widget child) {
+                            return Transform(
+                              transform: new Matrix4.rotationZ(
+                                  _animationController.value * 0.8),
+                              alignment: FractionalOffset.center,
+                              child: _animationController.isDismissed
+                                  ? widget.parentButtonIcon
+                                  : new Icon(
+                                      widget.finalButtonIcon == null
+                                          ? Icons.close
+                                          : widget.finalButtonIcon.icon,
+                                    ),
+                            );
+                          },
+                        ),
+                ),
+              );
+            },
+          )
+        : Container();
 
     if (hasChildButtons) {
-      var mainFloatingButton = AnimatedBuilder(
-        animation: this._animationController,
-        builder: (BuildContext context, Widget child) {
-          return Transform.rotate(
-            angle: this._animationController.value * 0.8,
-            child: mainFAB,
-          );
-        },
-      );
+      var mainFloatingButton = _animationController != null
+          ? AnimatedBuilder(
+              animation: _animationController,
+              builder: (BuildContext context, Widget child) {
+                return Transform.rotate(
+                  angle: _animationController.value * 0.8,
+                  child: mainFAB,
+                );
+              },
+            )
+          : Container();
 
       var childButtonsList = widget.children == null ||
               widget.children.length == 0
@@ -201,18 +223,20 @@ class _NestedFabState extends State<NestedFab> with TickerProviderStateMixin {
                     height: widget.orientation == UnicornOrientation.VERTICAL
                         ? 50
                         : 300,
-                    child: ScaleTransition(
-                      scale: CurvedAnimation(
-                        parent: this._animationController,
-                        curve: Interval(
-                          intervalValue,
-                          1.0,
-                          curve: Curves.linear,
-                        ),
-                      ),
-                      alignment: FractionalOffset.bottomRight,
-                      child: widget.children[index],
-                    ),
+                    child: _animationController != null
+                        ? ScaleTransition(
+                            scale: CurvedAnimation(
+                              parent: _animationController,
+                              curve: Interval(
+                                intervalValue,
+                                1.0,
+                                curve: Curves.linear,
+                              ),
+                            ),
+                            alignment: FractionalOffset.bottomRight,
+                            child: widget.children[index],
+                          )
+                        : Container(),
                   ),
                 );
               },
@@ -239,21 +263,23 @@ class _NestedFabState extends State<NestedFab> with TickerProviderStateMixin {
         ),
       );
 
-      var modal = ScaleTransition(
-        scale: CurvedAnimation(
-          parent: this._animationController,
-          curve: Interval(1.0, 1.0, curve: Curves.linear),
-        ),
-        alignment: FractionalOffset.center,
-        child: GestureDetector(
-          onTap: mainActionButtonOnPressed,
-          child: Container(
-            color: widget.backgroundColor,
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-          ),
-        ),
-      );
+      var modal = _animationController != null
+          ? ScaleTransition(
+              scale: CurvedAnimation(
+                parent: _animationController,
+                curve: Interval(1.0, 1.0, curve: Curves.linear),
+              ),
+              alignment: FractionalOffset.center,
+              child: GestureDetector(
+                onTap: mainActionButtonOnPressed,
+                child: Container(
+                  color: widget.backgroundColor,
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                ),
+              ),
+            )
+          : Container();
 
       return widget.hasBackground
           ? Stack(
