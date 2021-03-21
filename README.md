@@ -42,7 +42,7 @@
     </div>
 - [ ] 6. <b>When we add more buttons the spacings should be equal.</b> Please set a variable so I can adjust the spacing in 1 place.
     <div class="imgContainer">
-          <img src="images/spacing.png" height="300">
+          <img src="images/spacing.png" height="150">
     </div>
 - [ ] 7. <b>When we add more buttons they should automatically only allow for 1 branch to be open at a time</b> It needs to be scalable, 
         so I need to be able to add and remove buttons without having to change the code too much.
