@@ -49,5 +49,11 @@
     <div class="imgContainer">
           <img src="images/scalability.png" height="300">
     </div>
+- [ ] 8. <b>Implement a bool value that we can change (changing inside the code for now is fine, I will implement a user prefs setting in my app).
+        <br> If true => the menu will only collapse to the horizontal branch (except when we hit the big X)
+        <br> If false => the whole menu will collapse (like the current situation) </br> 
+        div class="imgContainer">
+              <img src="images/collapse.png" height="300">
+        </div>
 
     
