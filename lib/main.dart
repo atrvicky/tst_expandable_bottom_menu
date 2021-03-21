@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:tst_expandable_bottom_menu/nestedFab.dart';
 import 'package:tst_expandable_bottom_menu/unicorndial_2.dart';
@@ -113,6 +112,58 @@ List<UnicornDialer> _getProfileMenu() {
       parentButton: Icon(Icons.settings),
       parentHeroTag: "settingParentTag",
       childButtons: [
+        FloatingActionButton(
+          backgroundColor: Colors.grey[700],
+          mini: true,
+          heroTag: "phoneTag",
+          child: Icon(Icons.phone),
+          onPressed: () {
+            print("phone");
+          },
+        ),
+      ],
+    ),
+    UnicornDialer(
+      parentButtonBackground: Colors.grey[700],
+      backgroundColor: Colors.transparent,
+      parentButton: Icon(Icons.settings),
+      parentHeroTag: "settingParentTag",
+      childButtons: [
+        FloatingActionButton(
+          backgroundColor: Colors.grey[700],
+          mini: true,
+          heroTag: "phoneTag",
+          child: Icon(Icons.phone),
+          onPressed: () {
+            print("phone");
+          },
+        ),
+      ],
+    ),
+    UnicornDialer(
+      parentButtonBackground: Colors.grey[700],
+      backgroundColor: Colors.transparent,
+      parentButton: Icon(Icons.settings),
+      parentHeroTag: "settingParentTag",
+      childButtons: [
+        FloatingActionButton(
+          backgroundColor: Colors.grey[700],
+          mini: true,
+          heroTag: "phoneTag",
+          child: Icon(Icons.phone),
+          onPressed: () {
+            print("phone");
+          },
+        ),
+        FloatingActionButton(
+          backgroundColor: Colors.grey[700],
+          mini: true,
+          heroTag: "phoneTag",
+          child: Icon(Icons.phone),
+          onPressed: () {
+            print("phone");
+          },
+        ),
         FloatingActionButton(
           backgroundColor: Colors.grey[700],
           mini: true,

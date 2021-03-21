@@ -19,24 +19,35 @@
 
 
 # Todos
-- [ ] 1. <b>Make the buttons align perfectly</b> (it seems they are a bit mis aligned)
+- [x] 1. <b>Make the buttons align perfectly</b> (it seems they are a bit mis aligned)
     <div class="imgContainer">
-        <img src="images/todo_1.png" height="300">
+        <img src="images/todo_1.png" height="100">
     </div>
-- [ ] 2. <b>Only one sub-branch can be opened at a time</b>. So, when we click the "clock" and then click the "person". 
+- [x] 2. <b>Only one sub-branch can be opened at a time</b>. So, when we click the "clock" and then click the "person". 
          The "clock"-branch should close. 
   <div class="imgContainer">
-          <img src="images/todo_22.png" height="300">
+          <img src="images/todo_22.png" height="100">
   </div>
-- [ ] 3. <b>All branches of the menu should collapse when we click on the background</b> (I made the background purple, just so it is easier to understand what I mean with background)
+- [x] 3. <b>All branches of the menu should collapse when we click on the background</b> (I made the background purple, just so it is easier to understand what I mean with background)
     <div class="imgContainer">
-            <img src="images/todo_3.png" height="300">
+            <img src="images/todo_3.png" height="100">
     </div>
-- [ ] 4. <b>All branches of the menu should collapse when we press the bank/phone button </b>(when we press the 2nd branch button)
+- [x] 4. <b>All branches of the menu should collapse when we press the bank/phone button </b>(when we press the 2nd branch button)
     <div class="imgContainer">
-            <img src="images/todo_5.png" height="300">
+            <img src="images/todo_5.png" height="100">
     </div>
-- [ ] 5. <b>All branches of the menu should collapse when we press the big X</b> (the main floatingactionbutton)
+- [x] 5. <b>All branches of the menu should collapse when we press the big X</b> (the main floatingactionbutton)
     <div class="imgContainer">
-          <img src="images/todo_6.png" height="300">
+          <img src="images/todo_6.png" height="100">
     </div>
+- [ ] 6. <b>When we add more buttons the spacings should be equal.</b> Please set a variable so I can adjust the spacing in 1 place.
+    <div class="imgContainer">
+          <img src="images/spacing.png" height="300">
+    </div>
+- [ ] 7. <b>When we add more buttons they should automatically only allow for 1 branch to be open at a time</b> It needs to be scalable, 
+        so I need to be able to add and remove buttons without having to change the code too much.
+    <div class="imgContainer">
+          <img src="images/scalability.png" height="300">
+    </div>
+
+    
