@@ -239,7 +239,7 @@ class _UnicornDialer extends State<UnicornDialer>
                         : ((widget.childButtons.length - index) * 55.0) + 5,
                     bottom: widget.orientation == UnicornOrientation.VERTICAL
                         ? ((widget.childButtons.length - index) * 55.0) + 5
-                        : 4.0,
+                        : 0.0,
                     child: Container(
                       child: Row(children: [
                         // ScaleTransition(
@@ -271,7 +271,7 @@ class _UnicornDialer extends State<UnicornDialer>
                 });
 
       var unicornDialWidget = Container(
-          margin: widget.hasNotch ? EdgeInsets.only(bottom: 15.0) : null,
+          margin: widget.hasNotch ? EdgeInsets.only(bottom: 0.0) : null,
           height: double.infinity,
           width: double.infinity,
           child: Stack(

@@ -165,52 +165,58 @@ class _NestedFabState extends State<NestedFab> with TickerProviderStateMixin {
         },
       );
 
-      var childButtonsList =
-          widget.children == null || widget.children.length == 0
-              ? List<Widget>()
-              : List.generate(
-                  widget.children.length,
-                  (index) {
-                    var intervalValue = index == 0
-                        ? 0.9
-                        : ((widget.children.length - index) /
-                                widget.children.length) -
-                            0.2;
+      var childButtonsList = widget.children == null ||
+              widget.children.length == 0
+          ? List<Widget>()
+          : List.generate(
+              widget.children.length,
+              (index) {
+                var intervalValue = index == 0
+                    ? 0.9
+                    : ((widget.children.length - index) /
+                            widget.children.length) -
+                        0.2;
 
-                    intervalValue =
-                        intervalValue < 0.0 ? (1 / index) * 0.5 : intervalValue;
+                intervalValue =
+                    intervalValue < 0.0 ? (1 / index) * 0.5 : intervalValue;
 
-                    return Positioned(
-                      right: widget.orientation == UnicornOrientation.VERTICAL
-                          ? 4.0
-                          : ((widget.children.length - index) * 55.0) + 15,
-                      bottom: widget.orientation == UnicornOrientation.VERTICAL
-                          ? ((widget.children.length - index) * 55.0) + 15
-                          : 4.0,
-                      child: Container(
-                        width: widget.orientation == UnicornOrientation.VERTICAL
-                            ? 300
-                            : 40,
-                        height:
-                            widget.orientation == UnicornOrientation.VERTICAL
-                                ? 40
-                                : 300,
-                        child: ScaleTransition(
-                          scale: CurvedAnimation(
-                            parent: this._animationController,
-                            curve: Interval(
-                              intervalValue,
-                              1.0,
-                              curve: Curves.linear,
-                            ),
-                          ),
-                          alignment: FractionalOffset.bottomRight,
-                          child: widget.children[index],
+                return Positioned(
+                  right: widget.orientation == UnicornOrientation.VERTICAL
+                      ? 0.0
+                      : ((widget.children.length - index) * 55.0) + 15,
+                  bottom: widget.orientation == UnicornOrientation.VERTICAL
+                      ? ((widget.children.length - index) * 55.0) + 15
+                      : 0.0,
+                  child: Container(
+                    margin: widget.orientation == UnicornOrientation.VERTICAL
+                        ? index < (widget.children.length - 1)
+                            ? EdgeInsets.only(bottom: 8)
+                            : EdgeInsets.only(bottom: 0)
+                        : index < (widget.children.length - 1)
+                            ? EdgeInsets.only(right: 8)
+                            : EdgeInsets.only(right: 0),
+                    width: widget.orientation == UnicornOrientation.VERTICAL
+                        ? 300
+                        : 50,
+                    height: widget.orientation == UnicornOrientation.VERTICAL
+                        ? 50
+                        : 300,
+                    child: ScaleTransition(
+                      scale: CurvedAnimation(
+                        parent: this._animationController,
+                        curve: Interval(
+                          intervalValue,
+                          1.0,
+                          curve: Curves.linear,
                         ),
                       ),
-                    );
-                  },
+                      alignment: FractionalOffset.bottomRight,
+                      child: widget.children[index],
+                    ),
+                  ),
                 );
+              },
+            );
 
       var unicornDialWidget = Container(
         margin: widget.hasNotch ? EdgeInsets.only(bottom: 15.0) : null,

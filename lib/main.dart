@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        backgroundColor: Colors.black,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -42,10 +43,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[400],
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        backgroundColor: Colors.grey[400],
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -78,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
 List<UnicornDialer> _getProfileMenu() {
   List<UnicornDialer> children = [
     UnicornDialer(
-      parentButtonBackground: Colors.grey[700],
+      parentButtonBackground: Colors.red,
       backgroundColor: Colors.transparent,
       parentButton: Icon(Icons.add),
       childButtons: [
@@ -89,6 +92,15 @@ List<UnicornDialer> _getProfileMenu() {
           child: Icon(Icons.account_balance),
           onPressed: () {
             print("bank");
+          },
+        ),
+        FloatingActionButton(
+          backgroundColor: Colors.grey[700],
+          mini: true,
+          heroTag: "lockTag",
+          child: Icon(Icons.lock),
+          onPressed: () {
+            print("lock");
           },
         ),
       ],
@@ -109,19 +121,6 @@ List<UnicornDialer> _getProfileMenu() {
         ),
       ],
     )
-
-    // TODO: Make the UnicornButton take a UnicornDailer, so that we can expand the menu twice.
-    // TODO: See images/Start.png and images/Result.png to see what the end result should look like
-    //
-    // UnicornButton(
-    //   currentButton: UnicornDialer(
-    //     parentButtonBackground: Colors.grey[700],
-    //     orientation: UnicornOrientation.VERTICAL,
-    //     parentButton: Icon(Icons.person),
-    //     childButtons: _getProfileMenu(),
-    //   ),
-    // ),
   ];
-
   return children;
 }
