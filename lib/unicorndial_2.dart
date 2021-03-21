@@ -13,7 +13,7 @@ class UnicornDialer extends StatefulWidget {
   final Icon finalButtonIcon;
   final bool hasBackground;
   final Color parentButtonBackground;
-  final List<FloatingActionButton> childButtons;
+  List<FloatingActionButton> childButtons;
   final int animationDuration;
   final double childPadding;
   final Color backgroundColor;
@@ -188,8 +188,6 @@ class _UnicornDialer extends State<UnicornDialer>
                         widget.childButtons[index].onPressed();
                       }
                       _animationController.reverse();
-                      if (parentFab != null)
-                        parentFab.fabState.reverseAnimation();
                     },
                     child: widget.childButtons[index].child,
                     heroTag: widget.childButtons[index].heroTag,

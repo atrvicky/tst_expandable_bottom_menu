@@ -211,6 +211,34 @@ class _NestedFabState extends State<NestedFab> with TickerProviderStateMixin {
                 intervalValue =
                     intervalValue < 0.0 ? (1 / index) * 0.5 : intervalValue;
 
+                UnicornDialer childDialer = widget.children[index];
+                List<FloatingActionButton> newList = List();
+                for (FloatingActionButton fabChild
+                    in childDialer.childButtons) {
+                  FloatingActionButton newFab = FloatingActionButton(
+                    onPressed: () {
+                      if (fabChild.onPressed != null) {
+                        fabChild.onPressed();
+                      }
+                      reverseAnimation();
+                    },
+                    child: fabChild.child,
+                    heroTag: fabChild.heroTag,
+                    backgroundColor: fabChild.backgroundColor,
+                    mini: fabChild.mini,
+                    tooltip: fabChild.tooltip,
+                    key: fabChild.key,
+                    elevation: fabChild.elevation,
+                    foregroundColor: fabChild.foregroundColor,
+                    highlightElevation: fabChild.highlightElevation,
+                    isExtended: fabChild.isExtended,
+                    shape: fabChild.shape,
+                  );
+                  newList.add(newFab);
+                }
+
+                childDialer.childButtons = newList;
+
                 return Positioned(
                   right: widget.orientation == UnicornOrientation.VERTICAL
                       ? 0.0
@@ -243,7 +271,7 @@ class _NestedFabState extends State<NestedFab> with TickerProviderStateMixin {
                               ),
                             ),
                             alignment: FractionalOffset.bottomRight,
-                            child: widget.children[index],
+                            child: childDialer,
                           )
                         : Container(),
                   ),
