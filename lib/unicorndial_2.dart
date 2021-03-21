@@ -7,59 +7,6 @@ class UnicornOrientation {
   static const VERTICAL = 1;
 }
 
-class UnicornButton extends FloatingActionButton {
-  final FloatingActionButton currentButton;
-  final String labelText;
-  final double labelFontSize;
-  final Color labelColor;
-  final Color labelBackgroundColor;
-  final Color labelShadowColor;
-  final bool labelHasShadow;
-  final bool hasLabel;
-
-  UnicornButton(
-      {this.currentButton,
-      this.labelText,
-      this.labelFontSize = 14.0,
-      this.labelColor,
-      this.labelBackgroundColor,
-      this.labelShadowColor,
-      this.labelHasShadow = true,
-      this.hasLabel = false})
-      : assert(currentButton != null);
-
-  Widget returnLabel() {
-    return Container(
-        decoration: BoxDecoration(
-            boxShadow: this.labelHasShadow
-                ? [
-                    new BoxShadow(
-                      color: this.labelShadowColor == null
-                          ? Color.fromRGBO(204, 204, 204, 1.0)
-                          : this.labelShadowColor,
-                      blurRadius: 3.0,
-                    ),
-                  ]
-                : null,
-            color: this.labelBackgroundColor == null
-                ? Colors.white
-                : this.labelBackgroundColor,
-            borderRadius: BorderRadius.circular(3.0)), //color: Colors.white,
-        padding: EdgeInsets.all(9.0),
-        child: Text(this.labelText,
-            style: TextStyle(
-                fontSize: this.labelFontSize,
-                fontWeight: FontWeight.bold,
-                color: this.labelColor == null
-                    ? Color.fromRGBO(119, 119, 119, 1.0)
-                    : this.labelColor)));
-  }
-
-  Widget build(BuildContext context) {
-    return this.currentButton;
-  }
-}
-
 class UnicornDialer extends StatefulWidget {
   int orientation;
   final Icon parentButton;
@@ -98,9 +45,7 @@ class UnicornDialer extends StatefulWidget {
   }
 
   void collapseParent() {
-    if (dialerState != null) {
-      dialerState.collapseParent();
-    }
+    if (dialerState != null) dialerState.collapseParent();
   }
 }
 
@@ -109,15 +54,24 @@ class _UnicornDialer extends State<UnicornDialer>
   AnimationController _animationController;
   AnimationController _parentController;
   bool isOpen = false;
+  NestedFab parentFab;
 
   @override
   void initState() {
+    parentFab = context.findAncestorWidgetOfExactType();
     _animationController = AnimationController(
-        vsync: this,
-        duration: Duration(milliseconds: widget.animationDuration));
+      vsync: this,
+      duration: Duration(
+        milliseconds: widget.animationDuration,
+      ),
+    );
 
-    _parentController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
+    _parentController = AnimationController(
+      vsync: this,
+      duration: Duration(
+        milliseconds: 200,
+      ),
+    );
 
     super.initState();
   }
@@ -132,7 +86,6 @@ class _UnicornDialer extends State<UnicornDialer>
   void mainActionButtonOnPressed() {
     if (_animationController.isDismissed) {
       _animationController.forward();
-      NestedFab parentFab = context.findAncestorWidgetOfExactType();
       if (parentFab != null) {
         parentFab.collapseOtherParents(widget.parentHeroTag);
       }
@@ -229,32 +182,28 @@ class _UnicornDialer extends State<UnicornDialer>
                   intervalValue =
                       intervalValue < 0.0 ? (1 / index) * 0.5 : intervalValue;
 
-                  // var childFAB = FloatingActionButton(
-                  //     onPressed: () {
-                  //       if (widget.childButtons[index].currentButton.onPressed !=
-                  //           null) {
-                  //         widget.childButtons[index].currentButton.onPressed();
-                  //       }
-
-                  //       this._animationController.reverse();
-                  //     },
-                  //     child: widget.childButtons[index].currentButton.child,
-                  //     heroTag: widget.childButtons[index].currentButton.heroTag,
-                  //     backgroundColor:
-                  //         widget.childButtons[index].currentButton.backgroundColor,
-                  //     mini: widget.childButtons[index].currentButton.mini,
-                  //     tooltip: widget.childButtons[index].currentButton.tooltip,
-                  //     key: widget.childButtons[index].currentButton.key,
-                  //     elevation: widget.childButtons[index].currentButton.elevation,
-                  //     foregroundColor:
-                  //         widget.childButtons[index].currentButton.foregroundColor,
-                  //     highlightElevation: widget
-                  //         .childButtons[index].currentButton.highlightElevation,
-                  //     isExtended:
-                  //         widget.childButtons[index].currentButton.isExtended,
-                  //     shape: widget.childButtons[index].currentButton.shape);
-
-                  var childFAB = widget.childButtons[index];
+                  var childFAB = FloatingActionButton(
+                    onPressed: () {
+                      if (widget.childButtons[index].onPressed != null) {
+                        widget.childButtons[index].onPressed();
+                      }
+                      _animationController.reverse();
+                      if (parentFab != null)
+                        parentFab.fabState.reverseAnimation();
+                    },
+                    child: widget.childButtons[index].child,
+                    heroTag: widget.childButtons[index].heroTag,
+                    backgroundColor: widget.childButtons[index].backgroundColor,
+                    mini: widget.childButtons[index].mini,
+                    tooltip: widget.childButtons[index].tooltip,
+                    key: widget.childButtons[index].key,
+                    elevation: widget.childButtons[index].elevation,
+                    foregroundColor: widget.childButtons[index].foregroundColor,
+                    highlightElevation:
+                        widget.childButtons[index].highlightElevation,
+                    isExtended: widget.childButtons[index].isExtended,
+                    shape: widget.childButtons[index].shape,
+                  );
 
                   return Positioned(
                     right: widget.orientation == UnicornOrientation.VERTICAL

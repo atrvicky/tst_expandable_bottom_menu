@@ -16,27 +16,32 @@ class NestedFab extends StatefulWidget {
   final Object parentHeroTag;
   final bool hasNotch;
 
-  NestedFab(
-      {this.parentButton,
-      this.parentButtonBackground,
-      this.children,
-      this.parentButtonIcon,
-      this.onMainButtonPressed,
-      this.orientation = UnicornOrientation.HORIZONTAL,
-      this.hasBackground = true,
-      this.backgroundColor = Colors.white30,
-      this.parentHeroTag = "parent",
-      this.finalButtonIcon,
-      this.childPadding = 4.0,
-      this.hasNotch = false})
-      : assert(children != null);
+  _NestedFabState fabState;
+
+  NestedFab({
+    this.parentButton,
+    this.parentButtonBackground,
+    this.children,
+    this.parentButtonIcon,
+    this.onMainButtonPressed,
+    this.orientation = UnicornOrientation.HORIZONTAL,
+    this.hasBackground = true,
+    this.backgroundColor = Colors.white30,
+    this.parentHeroTag = "parent",
+    this.finalButtonIcon,
+    this.childPadding = 4.0,
+    this.hasNotch = false,
+  }) : assert(children != null);
 
   @override
-  State<NestedFab> createState() => _NestedFabState();
+  State<NestedFab> createState() {
+    fabState = _NestedFabState();
+    return _NestedFabState();
+  }
 
   void collapseOtherParents(String tag) {
     for (UnicornDialer dialer in children) {
-      if (dialer.parentHeroTag != tag) {
+      if (tag == null || dialer.parentHeroTag != tag) {
         dialer.collapseParent();
       }
     }
@@ -48,7 +53,6 @@ class _NestedFabState extends State<NestedFab> with TickerProviderStateMixin {
   AnimationController _parentController;
 
   bool isOpen = false;
-
 
   @override
   void initState() {
@@ -81,6 +85,12 @@ class _NestedFabState extends State<NestedFab> with TickerProviderStateMixin {
       _animationController.forward();
       collapseAllParents();
     } else {
+      reverseAnimation();
+    }
+  }
+
+  void reverseAnimation() {
+    if (_animationController != null && !_animationController.isDismissed) {
       _animationController.reverse();
     }
   }
@@ -93,8 +103,8 @@ class _NestedFabState extends State<NestedFab> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    if (_animationController != null)
-      _animationController.reverse();
+    if (widget.fabState == null) widget.fabState = this;
+    _animationController.reverse();
 
     var hasChildButtons = widget.children != null && widget.children.length > 0;
 
@@ -107,8 +117,7 @@ class _NestedFabState extends State<NestedFab> with TickerProviderStateMixin {
       }
     }
 
-    if (_parentController != null &&
-        !_parentController.isAnimating) {
+    if (_parentController != null && !_parentController.isAnimating) {
       if (_parentController.isCompleted) {
         _parentController.forward().then((s) {
           _parentController.reverse().then((e) {
@@ -245,9 +254,7 @@ class _NestedFabState extends State<NestedFab> with TickerProviderStateMixin {
       var unicornDialWidget = Container(
         margin: widget.hasNotch ? EdgeInsets.only(bottom: 15.0) : null,
         height: double.infinity,
-        width: widget.orientation == UnicornOrientation.HORIZONTAL
-            ? ((widget.children.length * 60) + 100).toDouble()
-            : 300,
+        width: double.infinity,
         child: Stack(
           //fit: StackFit.expand,
           alignment: Alignment.bottomRight,
@@ -263,7 +270,7 @@ class _NestedFabState extends State<NestedFab> with TickerProviderStateMixin {
         ),
       );
 
-      var modal = _animationController != null
+      var scrim = _animationController != null
           ? ScaleTransition(
               scale: CurvedAnimation(
                 parent: _animationController,
@@ -286,8 +293,12 @@ class _NestedFabState extends State<NestedFab> with TickerProviderStateMixin {
               alignment: Alignment.topCenter,
               overflow: Overflow.visible,
               children: [
-                Positioned(right: -16.0, bottom: -16.0, child: modal),
-                unicornDialWidget
+                Positioned(
+                  right: -16.0,
+                  bottom: -16.0,
+                  child: scrim,
+                ),
+                unicornDialWidget,
               ],
             )
           : unicornDialWidget;
