@@ -17,3 +17,26 @@
 </div>
 
 
+
+# Todos
+- [ ] 1. <b>Make the buttons align perfectly</b> (it seems they are a bit mis aligned)
+    <div class="imgContainer">
+        <img src="images/todo_1.png" height="300">
+    </div>
+- [ ] 2. <b>Only one sub-branch can be opened at a time</b>. So, when we click the "clock" and then click the "person". 
+         The "clock"-branch should close. 
+  <div class="imgContainer">
+          <img src="images/todo_22.png" height="300">
+  </div>
+- [ ] 3. <b>All branches of the menu should collapse when we click on the background</b> (I made the background purple, just so it is easier to understand what I mean with background)
+    <div class="imgContainer">
+            <img src="images/todo_3.png" height="300">
+    </div>
+- [ ] 4. <b>All branches of the menu should collapse when we press the bank/phone button </b>(when we press the 2nd branch button)
+    <div class="imgContainer">
+            <img src="images/todo_5.png" height="300">
+    </div>
+- [ ] 5. <b>All branches of the menu should collapse when we press the big X</b> (the main floatingactionbutton)
+    <div class="imgContainer">
+          <img src="images/todo_6.png" height="300">
+    </div>
